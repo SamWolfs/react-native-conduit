@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, ImageStyle } from 'react-native';
 
 type CircledImage = {
   size: number;
+  style?: ImageStyle;
   uri?: string;
 }
 
@@ -15,7 +16,7 @@ export const CircledImage = (image: CircledImage): JSX.Element => {
 
   return (
     <Image
-          style={imageStyle}
+          style={[imageStyle, image.style]}
           source={{
             uri: image.uri || "https://static.productionready.io/images/smiley-cyrus.jpg"
           }}

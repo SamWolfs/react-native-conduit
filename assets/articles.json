@@ -1,15 +1,15 @@
 {
   "articles": [
     {
-      "title": "test",
+      "title": "React Native Course",
       "slug": "test-e93rtl",
-      "body": "test",
+      "body": "Welcome to the React Native Course! I hope you're enjoying the content!",
       "createdAt": "2019-10-06T09:56:06.330Z",
       "updatedAt": "2019-10-06T09:56:06.330Z",
-      "tagList": [],
+      "tagList": ["test", "jsx", "react"],
       "description": "test",
       "author": {
-        "username": "s13581@pjwstk.edu.pl",
+        "username": "be.samwolfs@gmail.com",
         "bio": null,
         "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
         "following": false
