@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CircledImage } from './src/ui/CircledImage';
 
 // TODO: Create new file in the src/ui directory named CircledImage.tsx
 // TODO: Build a custom component `CircledImage` that uses the built-in <Image>-element and accepts a size and an optional image link
 // https://facebook.github.io/react-native/docs/image
 // TODO: Add a TypeScript type or interface for your component props
 // TODO: Use `https://static.productionready.io/images/smiley-cyrus.jpg` as fallback image in case non is provided
-// TODO (optional): Refactor to a generic `CircleOverlay` component that accepts a size and children
 // TODO (optional): Barrel your exports in an index.ts file under the src/ui directory
 
 export default function App() {
@@ -15,7 +13,6 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hello PXL!</Text>
       <Text>Time to get started!</Text>
-      <CircledImage size={100} />
     </View>
   );
 }
