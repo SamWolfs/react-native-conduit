@@ -15,7 +15,6 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hello PXL!</Text>
       <Text>Time to get started!</Text>
-      <CircledImage size={100} />
     </View>
   );
 }
