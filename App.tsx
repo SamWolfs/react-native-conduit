@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { ArticlePreview } from './src/ui/article/ArticlePreview';
 import { ARTICLES } from './assets/articles.js';
 
+// TODO: Use FlatList and your custom ArticlePreview item to render a list of articles (assets/articles.js)
+
 export default function App() {
   const articles = ARTICLES;
   return (
