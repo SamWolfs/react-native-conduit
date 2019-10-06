@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { CircledImage } from './src/ui';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello PXL!</Text>
-      <Text>Time to get started!</Text>
+      <CircledImage size={100} />
     </View>
   );
 }
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });

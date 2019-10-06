@@ -6,12 +6,6 @@
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "baseUrl": ".",
-    "paths": {
-      "@conduit/ui": ["src/ui"],
-      "@conduit/styles": ["src/styles"],
-      "@conduit/assets": ["assets"]
-    }
+    "resolveJsonModule": true
   }
 }
