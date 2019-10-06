@@ -1,4 +1,4 @@
-export const articles = [
+export const ARTICLES = [
   {
     title: 'test',
     slug: 'test-e93rtl',
