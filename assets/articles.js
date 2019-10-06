@@ -1,14 +1,14 @@
-export const articles = [
+export const ARTICLES = [
   {
-    title: 'test',
+    title: 'React Native Course',
     slug: 'test-e93rtl',
-    body: 'test',
+    body: 'Welcome to the React Native Course! I hope you\'re enjoying the content!',
     createdAt: '2019-10-06T09:56:06.330Z',
     updatedAt: '2019-10-06T09:56:06.330Z',
-    tagList: [],
-    description: 'test',
+    tagList: ['test', 'jsx', 'react'],
+    description: 'Learn to build mobile applications with React Native',
     author: {
-      username: 's13581@pjwstk.edu.pl',
+      username: 'be.samwolfs@gmail.com',
       bio: null,
       image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
       following: false
