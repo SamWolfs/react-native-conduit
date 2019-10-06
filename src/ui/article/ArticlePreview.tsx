@@ -22,7 +22,14 @@ type Author = {
   following: boolean;
 };
 
-export const ArticlePreview = (article: Article): JSX.Element => {
+// TODO: Split up into reusable and/or logical components.
+// TODO: Under src/ui/author create AuthorMeta.tsx, this component contains the image, username of the author as well as the creation time of the article
+// TODO: Under src/ui/article create ArticlePreviewBody.tsx, this component contains the title, description, call to action (Read more...) and tags
+// TODO: As always create the correct type/interfaces for each reusable component
+// TODO: Rebuild ArticlePreview using your refactored components
+// TODO: Use stylesheets to remove all in-line styling from the components, you can leave the stylesheets in the same file as the component or create an external style (e.g. AuthorMeta.styles.ts)
+
+export const ArticlePreview: React.FunctionComponent<Article> = (article): JSX.Element => {
   return (
     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'stretch' }}>
       <View
