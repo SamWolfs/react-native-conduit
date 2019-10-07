@@ -6,6 +6,7 @@ import { ArticlesList } from './src/pages/ArticlesList';
 
 export default function App() {
 
+  // TODO: Add a new route `Article` that routes to the ArticleDetail component
   const Stack = createStackNavigator({
     Home: {
       screen: ArticlesList

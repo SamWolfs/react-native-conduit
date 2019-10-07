@@ -3,7 +3,6 @@ import { View, FlatList } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { ARTICLES } from '../../assets/articles.js';
 import { styles } from './ArticlesList.styles';
-import { NavigationScreenOptionsGetter } from 'react-navigation';
 
 type Article = {
   title: string;
@@ -24,6 +23,10 @@ type Author = {
   image?: string;
   following: boolean;
 };
+
+// TODO: Change ArticlesList to a NavigationComponent<NavigationStackOptions, null> component
+// TODO: Write a function `navigateDetail` that accepts a slug and uses ArticleList's navigation prop to navigate to the Article route, passing slug as a param {slug: slug}
+// TODO: Under src/pages create a new component ArticleDetail.tsx; for now let it display the slug you passed to it through the navigator
 
 export const ArticlesList: React.FunctionComponent & { navigationOptions?: any } = (): JSX.Element => {
   const articles: Article[] = ARTICLES;
