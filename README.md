@@ -36,7 +36,7 @@
 3. use react-navigation's createStackNavigator function to build our navigation stack (1 route: Home)
 4. use react-navigation's createAppContainer function to create our new app container using the previously created Stack
 5. Render AppContainer inside App's container View
-6. In ArticlesList.tsx, set your Navigation Bar's title to 'Conduit' using NavigationScreenOptions 
+6. In ArticlesList.tsx, set your Navigation Bar's title to 'Conduit' using NavigationScreenOptions
 
 ## Exercise 1-6
 
