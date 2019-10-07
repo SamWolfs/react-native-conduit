@@ -11,10 +11,10 @@ type ArticlePreviewBody = {
 export const ArticlePreviewBody: React.FunctionComponent<ArticlePreviewBody> = article => {
   return (
     <View>
-      <Text>{article.title}</Text>
-      <Text>{article.description}</Text>
+      <Text style={styles.articleTitle}>{article.title}</Text>
+      <Text style={styles.articleDescription}>{article.description}</Text>
       <View style={styles.row}>
-        <Text>Read more...</Text>
+        <Text style={styles.callToAction}>Read more...</Text>
         <View style={styles.tags}>
           {article.tagList.map(tag => (
             <Text key={tag}>{tag}&nbsp;</Text>

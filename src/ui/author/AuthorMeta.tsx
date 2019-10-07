@@ -14,8 +14,8 @@ export const AuthorMeta: React.FunctionComponent<AuthorMeta> = (meta): JSX.Eleme
     <View style={styles.container}>
       <CircledImage size={36} uri={meta.image} />
       <View>
-        <Text>{meta.username}</Text>
-        <Text>{meta.createdAt}</Text>
+        <Text style={styles.username}>{meta.username}</Text>
+        <Text style={styles.createdAt}>{meta.createdAt}</Text>
       </View>
     </View>
   );
