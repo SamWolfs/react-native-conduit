@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from './ArticlePreviewBody.styles';
+import { LightTag } from '../tag/Tag';
 
 type ArticlePreviewBody = {
   title: string;
@@ -17,7 +18,7 @@ export const ArticlePreviewBody: React.FunctionComponent<ArticlePreviewBody> = a
         <Text style={styles.callToAction}>Read more...</Text>
         <View style={styles.tags}>
           {article.tagList.map(tag => (
-            <Text key={tag}>{tag}&nbsp;</Text>
+            <LightTag key={tag} value={tag}></LightTag>
           ))}
         </View>
       </View>

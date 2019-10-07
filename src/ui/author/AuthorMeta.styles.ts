@@ -4,13 +4,11 @@ export const styles = StyleSheet.create({
   container: {
     width: 'auto',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  image: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    marginRight: 4
+  imageContainer: {
+    margin: 4
   },
   username: {
     color: '#5CB85C'
