@@ -24,9 +24,10 @@ type Author = {
   following: boolean;
 };
 
-// TODO: Change ArticlesList to a NavigationComponent<NavigationStackOptions, null> component
-// TODO: Write a function `navigateArticle` that accepts a slug and uses ArticleList's navigation prop to navigate to the Article route, passing slug as a param {slug: slug}
+// TODO: Use the useNavigation hook to add navigation to the ArticlesList component
+// TODO: Write a function `navigateArticle` that navigates to the Article route, passing slug as a param {slug: slug}
 // TODO: Under src/pages create a new component ArticleDetail.tsx; for now let it display the slug you passed to it through the navigator
+// TODO: You can get route params through the navigation object of your component
 
 export const ArticlesList: React.FunctionComponent & { navigationOptions?: any } = (): JSX.Element => {
   const articles: Article[] = ARTICLES;
