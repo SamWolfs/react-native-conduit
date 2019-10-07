@@ -4,8 +4,8 @@ import { AuthorMeta } from '../author/AuthorMeta';
 import { ArticlePreviewBody } from './ArticlePreviewBody';
 import { styles } from './ArticlePreview.styles';
 
-// TODO: Add a new prop: navigateDetail to the Article type, optionally rename the type to ArticlePreview or ArticlePreviewProps
-// TODO: Build a Touchable of your choice around ArticlePreviewBody and bind onPress to the navigateDetail function
+// TODO: Add a new prop: navigateArticle to the Article type, optionally rename the type to ArticlePreview or ArticlePreviewProps
+// TODO: Build a Touchable of your choice around ArticlePreviewBody and bind onPress to the navigateArticle function
 type Article = {
   title: string;
   slug: string;
