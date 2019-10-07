@@ -3,13 +3,15 @@ import { StyleSheet, View } from 'react-native';
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { ArticlesList } from './src/pages/ArticlesList';
+import { ArticleDetail } from './src/pages/ArticleDetail';
 
 export default function App() {
-
-  // TODO: Add a new route `Article` that routes to the ArticleDetail component
   const Stack = createStackNavigator({
     Home: {
       screen: ArticlesList
+    },
+    Article: {
+      screen: ArticleDetail
     }
   });
   

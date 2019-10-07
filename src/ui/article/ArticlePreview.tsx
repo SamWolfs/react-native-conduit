@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { AuthorMeta } from '../author/AuthorMeta';
 import { ArticlePreviewBody } from './ArticlePreviewBody';
 import { styles } from './ArticlePreview.styles';
 
-// TODO: Add a new prop: navigateDetail to the Article type, optionally rename the type to ArticlePreview or ArticlePreviewProps
-// TODO: Build a Touchable of your choice around ArticlePreviewBody and bind onPress to the navigateDetail function
-type Article = {
+type ArticlePreview = {
   title: string;
   slug: string;
   body: string;
@@ -17,6 +15,7 @@ type Article = {
   author: Author;
   favorited: boolean;
   favoritesCount: number;
+  navigateArticle: (slug: string) => void;
 };
 
 type Author = {
@@ -26,16 +25,16 @@ type Author = {
   following: boolean;
 };
 
-export const ArticlePreview: React.FunctionComponent<Article> = (article): JSX.Element => {
+export const ArticlePreview: React.FunctionComponent<ArticlePreview> = (article): JSX.Element => {
   return (
     <View style={styles.container}>
-      <View
-        style={styles.header}
-      >
+      <View style={styles.header}>
         <AuthorMeta {...article} {...article.author} />
         <Text>{article.favoritesCount}</Text>
       </View>
-      <ArticlePreviewBody {...article} />
+      <TouchableOpacity onPress={() => article.navigateArticle(article.slug)}>
+        <ArticlePreviewBody {...article} />
+      </TouchableOpacity>
     </View>
   );
 };

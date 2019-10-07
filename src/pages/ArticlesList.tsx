@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, FlatList } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { ARTICLES } from '../../assets/articles.js';
 import { styles } from './ArticlesList.styles';
+import { NavigationScreenProp, NavigationParams, NavigationContext, NavigationRoute } from 'react-navigation';
+import { NavigationStackOptions } from 'react-navigation-stack';
 
 type Article = {
   title: string;
@@ -24,16 +26,23 @@ type Author = {
   following: boolean;
 };
 
-// TODO: Change ArticlesList to a NavigationComponent<NavigationStackOptions, null> component
-// TODO: Write a function `navigateDetail` that accepts a slug and uses ArticleList's navigation prop to navigate to the Article route, passing slug as a param {slug: slug}
-// TODO: Under src/pages create a new component ArticleDetail.tsx; for now let it display the slug you passed to it through the navigator
+const useNavigation = () => {
+  return useContext(NavigationContext) as NavigationScreenProp<
+  NavigationRoute,
+  NavigationParams
+>;
+};
 
-export const ArticlesList: React.FunctionComponent & { navigationOptions?: any } = (): JSX.Element => {
+
+export const ArticlesList: React.FunctionComponent & { navigationOptions?: NavigationStackOptions} = (): JSX.Element => {
   const articles: Article[] = ARTICLES;
+  const navigation = useNavigation();
+  const navigateArticle = (slug: string) => navigation.navigate('Article', {slug: slug});
+
   const renderItem = ({ item }: { item: Article }): JSX.Element => {
     return (
       <View style={styles.articleContainer}>
-        <ArticlePreview {...item} />
+        <ArticlePreview {...item} navigateArticle={navigateArticle} />
       </View>
     );
   };
@@ -45,7 +54,7 @@ export const ArticlesList: React.FunctionComponent & { navigationOptions?: any }
   );
 };
 
-ArticlesList.navigationOptions = {
+ArticlesList.navigationOptions = () => ({
   title: 'Conduit',
   headerStyle: {
     backgroundColor: '#5CB85C'
@@ -53,4 +62,4 @@ ArticlesList.navigationOptions = {
   headerTitleStyle: {
     color: '#FFF'
   }
-};
+});
