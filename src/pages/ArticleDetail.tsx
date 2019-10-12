@@ -1,13 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
-import { NavigationContext, NavigationScreenProp, NavigationRoute, NavigationParams } from 'react-navigation';
+import { useNavigation } from '../hooks';
 
-const useNavigation = () => {
-  return useContext(NavigationContext) as NavigationScreenProp<
-  NavigationRoute,
-  NavigationParams
->;
-};
+
 
 export const ArticleDetail: React.FunctionComponent = (): JSX.Element => {
   const navigation = useNavigation();

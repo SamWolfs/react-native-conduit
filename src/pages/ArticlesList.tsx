@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { ARTICLES } from '../../assets/articles.js';
 import { styles } from './ArticlesList.styles';
-import { NavigationScreenProp, NavigationParams, NavigationContext, NavigationRoute } from 'react-navigation';
 import { NavigationStackOptions } from 'react-navigation-stack';
+import { useNavigation } from '../hooks';
 
 type Article = {
   title: string;
@@ -25,14 +25,6 @@ type Author = {
   image?: string;
   following: boolean;
 };
-
-const useNavigation = () => {
-  return useContext(NavigationContext) as NavigationScreenProp<
-  NavigationRoute,
-  NavigationParams
->;
-};
-
 
 export const ArticlesList: React.FunctionComponent & { navigationOptions?: NavigationStackOptions} = (): JSX.Element => {
   const articles: Article[] = ARTICLES;
