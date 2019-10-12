@@ -1,38 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { ARTICLES } from '../../assets/articles.js';
 import { styles } from './ArticlesList.styles';
-import { NavigationScreenProp, NavigationParams, NavigationContext, NavigationRoute } from 'react-navigation';
 import { NavigationStackOptions } from 'react-navigation-stack';
-
-type Article = {
-  title: string;
-  slug: string;
-  body: string;
-  createdAt: string;
-  updatedAt: string;
-  tagList: string[];
-  description: string;
-  author: Author;
-  favorited: boolean;
-  favoritesCount: number;
-};
-
-type Author = {
-  username: string;
-  bio?: string;
-  image?: string;
-  following: boolean;
-};
-
-const useNavigation = () => {
-  return useContext(NavigationContext) as NavigationScreenProp<
-  NavigationRoute,
-  NavigationParams
->;
-};
-
+import { useNavigation } from '../hooks';
+import { Article } from '../data';
 
 export const ArticlesList: React.FunctionComponent & { navigationOptions?: NavigationStackOptions} = (): JSX.Element => {
   const articles: Article[] = ARTICLES;

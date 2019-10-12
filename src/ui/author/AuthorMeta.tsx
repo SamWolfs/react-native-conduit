@@ -3,13 +3,13 @@ import { View, Text } from 'react-native';
 import { CircledImage } from '../CircledImage';
 import { styles } from './AuthorMeta.styles';
 
-type AuthorMeta = {
+type Props = {
   username: string;
   image?: string;
   createdAt: string;
 };
 
-export const AuthorMeta: React.FunctionComponent<AuthorMeta> = (meta): JSX.Element => {
+export const AuthorMeta: React.FunctionComponent<Props> = (meta): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>

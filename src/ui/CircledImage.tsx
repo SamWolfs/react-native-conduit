@@ -1,13 +1,13 @@
 import React from 'react';
 import { Image, ImageStyle } from 'react-native';
 
-type CircledImage = {
+type Props = {
   size: number;
   style?: ImageStyle;
   uri?: string;
 }
 
-export const CircledImage = (image: CircledImage): JSX.Element => {
+export const CircledImage: React.FunctionComponent<Props> = (image): JSX.Element => {
   const imageStyle = {
     width: image.size,
     height: image.size,

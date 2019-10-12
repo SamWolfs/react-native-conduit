@@ -3,8 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { AuthorMeta } from '../author/AuthorMeta';
 import { ArticlePreviewBody } from './ArticlePreviewBody';
 import { styles } from './ArticlePreview.styles';
+import { FavoriteButton } from '../buttons/FavoriteButton';
+import { Author } from '../../data';
 
-type ArticlePreview = {
+type Props = {
   title: string;
   slug: string;
   body: string;
@@ -18,19 +20,12 @@ type ArticlePreview = {
   navigateArticle: (slug: string) => void;
 };
 
-type Author = {
-  username: string;
-  bio?: string;
-  image?: string;
-  following: boolean;
-};
-
-export const ArticlePreview: React.FunctionComponent<ArticlePreview> = (article): JSX.Element => {
+export const ArticlePreview: React.FunctionComponent<Props> = (article): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <AuthorMeta {...article} {...article.author} />
-        <Text>{article.favoritesCount}</Text>
+        <FavoriteButton favoritesCount={article.favoritesCount} />
       </View>
       <TouchableOpacity onPress={() => article.navigateArticle(article.slug)}>
         <ArticlePreviewBody {...article} />

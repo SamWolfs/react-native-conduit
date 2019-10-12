@@ -3,13 +3,13 @@ import { View, Text } from 'react-native';
 import { styles } from './ArticlePreviewBody.styles';
 import { LightTag } from '../tag/Tag';
 
-type ArticlePreviewBody = {
+type Props = {
   title: string;
   description: string;
   tagList: string[];
 }
 
-export const ArticlePreviewBody: React.FunctionComponent<ArticlePreviewBody> = article => {
+export const ArticlePreviewBody: React.FunctionComponent<Props> = (article): JSX.Element => {
   return (
     <View>
       <Text style={styles.articleTitle}>{article.title}</Text>
