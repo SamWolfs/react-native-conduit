@@ -13,8 +13,10 @@ export const ArticleDetail: React.FunctionComponent & { navigationOptions?: Navi
   const navigation = useNavigation();
   const { slug } = navigation.state.params;
   // TODO: Remove (or move to reducer) the article detail getter logic
+  // TODO: use useEffect hook to load an article detail, make sure useEffect only fires when slug is changed
   const article = (ARTICLES as Article[]).find(article => article.slug === slug);
   return (
+    // Use a conditional statement to render a <Text> element when article is undefined, and the actual detail component when the article is loaded
     <View>
       <ArticleHeader {...article} />
       <Text style={styles.bodyContainer}>{article.body}</Text>
@@ -36,5 +38,6 @@ ArticleDetail.navigationOptions = () => ({
 });
 
 // TODO: create a `mapStateToProps` function that takes a `state` as param and returns a Props object
-// TODO: create a `mapDispatchToProps` function that takes a `state` as param and returns a Props object
+// TODO: create a `mapDispatchToProps` function that takes `dispatch` as param and returns a Props object
+// EXAMPLE: dispatch => ({ doSomething: (var?) => dispatch(doSomething(var))})
 // TODO use react-redux's `connect()` function to bind the Redux store to our component. TIP: use export default connect()

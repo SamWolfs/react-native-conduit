@@ -14,7 +14,7 @@ const reducer: Reducer<any, any> = (
   }
 };
 
-// TODO: Define an Action Creator for the article detail action type (`getDetail`)
+// TODO: Define an Action Creator for the article detail action type (`getArticle`)
 // Remember: an action creator is a regular function that accepts an optional payload and returns an Action = { type: string, payload: Object }
 // TODO: (optional) if you have extra time, take a look at https://redux.js.org/recipes/usage-with-typescript and add strong typing to your ActionTypes, Reducers and State
 
