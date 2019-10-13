@@ -7,6 +7,9 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './src/reducks';
 
+// TODO: run `npm i redux-thunk` to install the Redux Thunk middleware
+// TODO: use redux's `addMiddleware(...middleware[])` function to add the thunk middleware
+
 export default function App() {
   const Stack = createStackNavigator({
     Home: {
