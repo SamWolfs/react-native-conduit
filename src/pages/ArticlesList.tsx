@@ -40,6 +40,6 @@ ArticlesList.navigationOptions = () => ({
   }
 });
 
-const mapStateToProps = (state) => ({articles: state.reducer.articles});
+const mapStateToProps = (state) => ({articles: state.article.list});
 const ArticlesListPage = connect(mapStateToProps)(ArticlesList);
 export default ArticlesListPage;
