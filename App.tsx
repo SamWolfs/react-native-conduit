@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import ArticlesListPage from './src/pages/ArticlesList';
-import { ArticleDetail } from './src/pages/ArticleDetail';
+import ArticleDetailPage from './src/pages/ArticleDetail';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './src/reducks';
@@ -13,7 +13,7 @@ export default function App() {
       screen: ArticlesListPage
     },
     Article: {
-      screen: ArticleDetail
+      screen: ArticleDetailPage
     }
   });
 

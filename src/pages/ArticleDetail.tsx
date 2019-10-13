@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { ARTICLES } from '../../assets/articles.js';
 import { NavigationStackOptions } from 'react-navigation-stack';
 import { styles } from './ArticleDetail.styles';
 import { useNavigation } from '../hooks';
 import { Article } from '../data';
 import { ArticleHeader } from '../ui';
+import { getArticle } from '../reducks/article';
+import { connect } from 'react-redux';
 
-// TODO: create new props for ArticleDetail (2 props: article, getArticle)
+type Props = {
+  article: Article;
+  getArticle: any;
+};
 
-export const ArticleDetail: React.FunctionComponent & { navigationOptions?: NavigationStackOptions } = (): JSX.Element => {
+const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
   const navigation = useNavigation();
   const { slug } = navigation.state.params;
-  // TODO: Remove (or move to reducer) the article detail getter logic
-  const article = (ARTICLES as Article[]).find(article => article.slug === slug);
+  useEffect(() => {
+    props.getArticle(slug);
+  }, [slug]);
   return (
     <View>
-      <ArticleHeader {...article} />
-      <Text style={styles.bodyContainer}>{article.body}</Text>
+      {!props.article ? (
+        <Text>Loading</Text>
+      ) : (
+        <>
+          <ArticleHeader {...props.article} />
+          <Text style={styles.bodyContainer}>{props.article.body}</Text>
+        </>
+      )}
     </View>
   );
 };
@@ -35,6 +46,11 @@ ArticleDetail.navigationOptions = () => ({
   }
 });
 
-// TODO: create a `mapStateToProps` function that takes a `state` as param and returns a Props object
-// TODO: create a `mapDispatchToProps` function that takes a `state` as param and returns a Props object
-// TODO use react-redux's `connect()` function to bind the Redux store to our component. TIP: use export default connect()
+const mapStateToProps = state => ({ article: state.article.detail });
+const mapDispatchToProps = dispatch => ({ getArticle: (slug: string) => dispatch(getArticle(slug)) });
+
+const ArticleDetailPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ArticleDetail);
+export default ArticleDetailPage; 
