@@ -7,7 +7,10 @@ import { NavigationStackOptions } from 'react-navigation-stack';
 import { useNavigation } from '../hooks';
 import { Article } from '../data';
 
+// TODO: create new props for ArticlesList (1 prop: articles)
+
 export const ArticlesList: React.FunctionComponent & { navigationOptions?: NavigationStackOptions} = (): JSX.Element => {
+  // TODO: remove static articles
   const articles: Article[] = ARTICLES;
   const navigation = useNavigation();
   const navigateArticle = (slug: string) => navigation.navigate('Article', {slug: slug});
@@ -36,3 +39,6 @@ ArticlesList.navigationOptions = () => ({
     color: '#FFF'
   }
 });
+
+// TODO: create a `mapStateToProps` function that takes a `state` as param and returns a Props object
+// TODO: use react-redux's `connect()` function to bind the Redux store to our component. TIP: use export default connect()
