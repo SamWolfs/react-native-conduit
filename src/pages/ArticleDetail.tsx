@@ -7,9 +7,12 @@ import { useNavigation } from '../hooks';
 import { Article } from '../data';
 import { ArticleHeader } from '../ui';
 
+// TODO: create new props for ArticleDetail (2 props: article, getArticle)
+
 export const ArticleDetail: React.FunctionComponent & { navigationOptions?: NavigationStackOptions } = (): JSX.Element => {
   const navigation = useNavigation();
   const { slug } = navigation.state.params;
+  // TODO: Remove (or move to reducer) the article detail getter logic
   const article = (ARTICLES as Article[]).find(article => article.slug === slug);
   return (
     <View>
@@ -31,3 +34,7 @@ ArticleDetail.navigationOptions = () => ({
     color: '#FFF'
   }
 });
+
+// TODO: create a `mapStateToProps` function that takes a `state` as param and returns a Props object
+// TODO: create a `mapDispatchToProps` function that takes a `state` as param and returns a Props object
+// TODO use react-redux's `connect()` function to bind the Redux store to our component. TIP: use export default connect()
