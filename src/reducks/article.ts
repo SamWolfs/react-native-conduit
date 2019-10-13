@@ -1,48 +1,131 @@
 import { Reducer } from "react";
-import { ARTICLES } from '../../assets/articles.js';
 import { Article } from "../data";
 
-const articles = ARTICLES;
-
 // Action Types
-// TODO: Add 5 more action types: LOAD_ARTICLE_LIST, LOAD_ARTICLE_LIST_SUCCESS, LOAD_ARTICLE_LIST_FAIL, LOAD_ARTICLE_DETAIL_SUCCESS, LOAD_ARTICLE_DETAIL_FAIL
+const LOAD_ARTICLE_LIST = 'conduit/article/LOAD_ARTICLE_LIST';
+const LOAD_ARTICLE_LIST_SUCCESS = 'conduit/article/LOAD_ARTICLE_LIST_SUCCESS';
+const LOAD_ARTICLE_LIST_FAIL = 'conduit/article/LOAD_ARTICLE_LIST_FAIL';
 const LOAD_ARTICLE_DETAIL = 'conduit/article/LOAD_ARTICLE_DETAIL';
+const LOAD_ARTICLE_DETAIL_SUCCESS = 'conduit/article/LOAD_ARTICLE_DETAIL_SUCCESS';
+const LOAD_ARTICLE_DETAIL_FAIL = 'conduit/article/LOAD_ARTICLE_LIST_FAIL';
 
-// TODO: (optional) create typescript types for each action
+type GetListAction = {
+  type: typeof LOAD_ARTICLE_LIST,
+  payload: any
+};
+
+type GetListActionSuccess = {
+  type: typeof LOAD_ARTICLE_LIST_SUCCESS,
+  payload: { data: Article[] }
+}
+
+type GetListActionFail = {
+  type: typeof LOAD_ARTICLE_LIST_FAIL,
+  payload: []
+}
+
 type GetDetailAction = {
   type: typeof LOAD_ARTICLE_DETAIL,
   payload: { slug: string }
 };
 
-type ActionTypes = GetDetailAction;
+type GetDetailActionSuccess = {
+  type: typeof LOAD_ARTICLE_DETAIL_SUCCESS,
+  payload: { data: Article }
+}
+
+type GetDetailActionFail = {
+  type: typeof LOAD_ARTICLE_DETAIL_FAIL,
+  payload: {}
+}
+
+type ActionTypes = GetListAction | GetListActionSuccess | GetListActionFail | GetDetailAction | GetDetailActionSuccess | GetDetailActionFail;
 
 // State Type
-// TODO: add loading state for both list and detail (TIP: isLoadingList, isLoadingDetail) and make sure to set their initial state to true (in reducer constructor)
 type ArticleState = {
   list: Article[],
-  detail: Article
+  isLoadingList: boolean,
+  detail: Article,
+  isLoadingDetail: boolean
 }
 
 // Reducer
-// TODO: Define reducers for all 5 actions
 const reducer: Reducer<ArticleState, ActionTypes> = (
-  state = { list: articles, detail: null }, action
+  state = { list: [], isLoadingList: true, detail: null, isLoadingDetail: true }, action
 ) => {
   switch (action.type) {
+    case LOAD_ARTICLE_LIST: {
+      return { ...state, isLoadingList: true };
+    }
+    case LOAD_ARTICLE_LIST_SUCCESS: {
+      return { ...state, list: action.payload.data, isLoadingList: false }
+    }
+    case LOAD_ARTICLE_LIST_FAIL: {
+      return { ...state, isLoadingList: false }
+    }
     case LOAD_ARTICLE_DETAIL: {
-      const article = state.list.find(article => article.slug === action.payload.slug);
-      return {...state, detail: article}
+      return { ...state, isLoadingDetail: true };
+    }
+    case LOAD_ARTICLE_DETAIL_SUCCESS: {
+      return { ...state, detail: action.payload.data, isLoadingDetail: false }
+    }
+    case LOAD_ARTICLE_LIST_FAIL: {
+      return { ...state, isLoadingDetail: false }
     }
     default: return state;
   }
 };
 
 // Action Creators
-// TODO: Define action creators for the SUCCESS & FAIL actions and thunks for the LOAD actions
-export const getArticle = (slug: string): ActionTypes => {
+export const getArticleList = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://conduit.productionready.io/api/articles`);
+      const body: { articles: Article[] } = await response.json();
+      dispatch(getArticleListSuccess(body.articles));
+    } catch (error) {
+      dispatch(getArticleListFail())
+    }
+  }
+}
+
+const getArticleListSuccess = (articles: Article[]) => {
   return {
-    type: LOAD_ARTICLE_DETAIL,
-    payload: { slug }
+    type: LOAD_ARTICLE_LIST_SUCCESS,
+    payload: { data: articles }
+  }
+}
+
+const getArticleListFail = () => {
+  return {
+    type: LOAD_ARTICLE_LIST_FAIL,
+    payload: {}
+  }
+}
+
+export const getArticle = (slug: string) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://conduit.productionready.io/api/articles/${slug}`);
+      const body: { article: Article } = await response.json();
+      dispatch(getArticleSuccess(body.article));
+    } catch (error) {
+      dispatch(getArticleFail())
+    }
+  }
+}
+
+const getArticleSuccess = (article: Article) => {
+  return {
+    type: LOAD_ARTICLE_DETAIL_SUCCESS,
+    payload: { data: article }
+  }
+}
+
+const getArticleFail = () => {
+  return {
+    type: LOAD_ARTICLE_DETAIL_FAIL,
+    payload: {}
   }
 }
 
