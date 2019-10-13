@@ -81,8 +81,8 @@ export const getArticleList = () => {
   return async (dispatch) => {
     try {
       const response = await fetch(`https://conduit.productionready.io/api/articles`);
-      const body: { articles: Article[] } = await response.json();
-      dispatch(getArticleListSuccess(body.articles));
+      const { articles }: { articles: Article[] } = await response.json();
+      dispatch(getArticleListSuccess(articles));
     } catch (error) {
       dispatch(getArticleListFail())
     }
@@ -107,8 +107,8 @@ export const getArticle = (slug: string) => {
   return async (dispatch) => {
     try {
       const response = await fetch(`https://conduit.productionready.io/api/articles/${slug}`);
-      const body: { article: Article } = await response.json();
-      dispatch(getArticleSuccess(body.article));
+      const { article }: { article: Article } = await response.json();
+      dispatch(getArticleSuccess(article));
     } catch (error) {
       dispatch(getArticleFail())
     }
