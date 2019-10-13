@@ -16,7 +16,7 @@ export const ArticleDetail: React.FunctionComponent & { navigationOptions?: Navi
   // TODO: use useEffect hook to load an article detail, make sure useEffect only fires when slug is changed
   const article = (ARTICLES as Article[]).find(article => article.slug === slug);
   return (
-    // Use a conditional statement to render a <Text> element when article is undefined, and the actual detail component when the article is loaded
+    // TODO: Use a conditional statement to render a <Text> element when article is undefined, and the actual detail component when the article is loaded
     <View>
       <ArticleHeader {...article} />
       <Text style={styles.bodyContainer}>{article.body}</Text>
