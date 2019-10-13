@@ -1,6 +1,9 @@
 import { Reducer } from "react";
 import { Article } from "../data";
 
+// TODO: Create new action types and action creators (CREATE_ARTICLE, CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAIL) and their corresponding reducer handlers to CREATE an ARTICLE and handle success or failure
+// TODO: When creating the action creator (thunk), use the (dispatch, getState) signature so you can access to logged in user's token and add it to the request headers
+// TIP: 'Authorization': 'Bearer ' + token
 // Action Types
 const LOAD_ARTICLE_LIST = 'conduit/article/LOAD_ARTICLE_LIST';
 const LOAD_ARTICLE_LIST_SUCCESS = 'conduit/article/LOAD_ARTICLE_LIST_SUCCESS';

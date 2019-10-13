@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, TouchableWithoutFeedback } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { styles } from './ArticlesList.styles';
 import { NavigationStackOptions } from 'react-navigation-stack';
@@ -7,6 +7,9 @@ import { useNavigation } from '../hooks';
 import { Article } from '../data';
 import { connect } from 'react-redux';
 import { getArticleList } from '../reducks/article';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Colors } from '../styles/_colors';
+
 
 type Props = {
   articles: Article[];
@@ -48,17 +51,25 @@ const ArticlesList: React.FunctionComponent<Props> & { navigationOptions?: Navig
   );
 };
 
-ArticlesList.navigationOptions = () => ({
+ArticlesList.navigationOptions = ({navigation}) => ({
   title: 'Conduit',
   headerStyle: {
     backgroundColor: '#5CB85C'
   },
   headerTitleStyle: {
     color: '#FFF'
-  }
+  },
+  headerRight: (
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('CreateArticle')}>
+        <Icon name="plus" style={{fontSize: 20, margin: 14}} color={Colors.fontLight} />
+    </TouchableWithoutFeedback>
+  )
 });
 
 const mapStateToProps = state => ({ articles: state.article.list, loading: state.article.isLoadingList });
 const mapDispatchToProps = dispatch => ({ getArticleList: () => dispatch(getArticleList()) });
-const ArticlesListPage = connect(mapStateToProps, mapDispatchToProps)(ArticlesList);
+const ArticlesListPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ArticlesList);
 export default ArticlesListPage;
