@@ -8,6 +8,8 @@ import { ArticleHeader } from '../ui';
 import { getArticle } from '../reducks/article';
 import { connect } from 'react-redux';
 
+// TODO: Add loading prop to Props type and mapStatetoProps
+
 type Props = {
   article: Article;
   getArticle: any;
@@ -19,6 +21,7 @@ const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: Navi
   useEffect(() => {
     props.getArticle(slug);
   }, [slug]);
+  // TODO: Use loading prop to show Loading message or Detail Component
   return (
     <View>
       {!props.article ? (
