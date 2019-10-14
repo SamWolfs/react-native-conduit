@@ -3,7 +3,7 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import ArticlesListPage from './src/pages/ArticlesList';
 import ArticleDetailPage from './src/pages/ArticleDetail';
-import CreateArticle from './src/pages/CreateArticle';
+import CreateArticlePage from './src/pages/CreateArticle';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './src/reducks';
@@ -19,7 +19,7 @@ export default function App() {
       screen: ArticleDetailPage
     },
     CreateArticle: {
-      screen: CreateArticle
+      screen: CreateArticlePage
     }
   });
 
@@ -28,7 +28,6 @@ export default function App() {
   const AppContainer = createAppContainer(Stack);
 
   useEffect(() => {
-    // TODO: fill in your account credentials, username and email can both be your school email address = recommended, don't choose too difficult of a password
     //@ts-ignore
     store.dispatch(loginUser({user: { username: 'swo', email: 'swo@asist.be', password: 'swoswoswo' }}));
   }, []);
