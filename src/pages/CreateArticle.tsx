@@ -1,11 +1,13 @@
-import React from 'react';
-import { View, TextInput, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, TextInput, Button, ToastAndroid, Text } from 'react-native';
 import { NavigationStackOptions } from 'react-navigation-stack';
 import { Colors } from '../styles/_colors';
 import { styles } from './CreateArticle.styles';
 import { ArticleForCreate } from '../data';
 import { createArticle } from '../reducks/article';
 import { connect } from 'react-redux';
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 
 type Props = {
   postArticle: any;
@@ -17,6 +19,7 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
   const [description, setDescription] = React.useState('');
   const [body, setBody] = React.useState('');
   const [taglist, setTaglist] = React.useState('');
+  const [location, setLocation] = React.useState(null);
 
   const createArticle = () => {
     const article: ArticleForCreate = {
@@ -32,6 +35,20 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
   // TODO: In the useEffect hook, use Permissions API to request LOCATION permission (see docs: https://docs.expo.io/versions/v35.0.0/sdk/location/)
   // TODO: Create a local state variable to hold the location, if permission is granted, otherwise show a Toast (https://facebook.github.io/react-native/docs/toastandroid) with a descriptive error message
   // TODO: Add a Text element to the form that shows from which Location the user is sending the article, or 'Location disabled' in case no permission was granted
+  useEffect(() => {
+    _getLocationAsync();
+  }, []);
+
+  const _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== Permissions.PermissionStatus.GRANTED) {
+      ToastAndroid.show('Location Permission Denied', ToastAndroid.SHORT);
+    } else {
+      const position = await Location.getCurrentPositionAsync();
+      const [location] = await Location.reverseGeocodeAsync(position.coords);
+      setLocation(location);
+    }
+  }
 
 
   return (
@@ -73,6 +90,7 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
         editable={!props.isLoading}
       />
       <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
+      <Text>{location ? location.city : location}</Text>
     </View>
   );
 };
