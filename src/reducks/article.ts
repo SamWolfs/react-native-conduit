@@ -75,11 +75,12 @@ type ArticleState = {
   isLoadingList: boolean;
   detail: Article;
   isLoadingDetail: boolean;
+  isLoadingCreate: boolean;
 };
 
 // Reducer
 const reducer: Reducer<ArticleState, ActionTypes> = (
-  state = { list: [], isLoadingList: true, detail: null, isLoadingDetail: true },
+  state = { list: [], isLoadingList: true, detail: null, isLoadingDetail: true, isLoadingCreate: false },
   action
 ) => {
   switch (action.type) {
@@ -188,6 +189,7 @@ const getArticleFail = () => {
 
 export const createArticle = (article: ArticleForCreate) => {
   return async (dispatch, getState) => {
+    dispatch(setCreateArticleLoading());
     try {
       const response = await fetch(`https://conduit.productionready.io/api/articles`, {
         method: 'POST',
@@ -205,6 +207,13 @@ export const createArticle = (article: ArticleForCreate) => {
     }
   };
 };
+
+const setCreateArticleLoading = () => {
+  return {
+    type: CREATE_ARTICLE,
+    payload: {}
+  }
+}
 
 const createArticleSuccess = (articles: Article[]) => {
   return {

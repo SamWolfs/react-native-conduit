@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 type Props = {
   postArticle: any;
+  isLoading: boolean;
 };
 
 const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
@@ -23,16 +24,48 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
       description: description,
       body: body,
       tagList: taglist.split(' ')
-    }
+    };
     props.postArticle(article);
-  }
+  };
 
   return (
-    <View style={{padding: 8}}>
-      <TextInput key="title" style={styles.input} placeholder="An interesting title" value={title} onChangeText={text => setTitle(text)}/>
-      <TextInput key="description" style={styles.input} multiline numberOfLines={2} placeholder="A small description" value={description} onChangeText={text => setDescription(text)}/>
-      <TextInput key="body" style={styles.input} multiline numberOfLines={10} placeholder="Your text post" value={body} onChangeText={text => setBody(text)}/>
-      <TextInput key="taglist" style={styles.lastInput} placeholder="Space separated tags (optional)" value={taglist} onChangeText={text => setTaglist(text)}/>
+    <View style={{ padding: 8 }}>
+      <TextInput
+        key="title"
+        style={styles.input}
+        placeholder="An interesting title"
+        value={title}
+        onChangeText={text => setTitle(text)}
+        editable={!props.isLoading}
+      />
+      <TextInput
+        key="description"
+        style={styles.input}
+        multiline
+        numberOfLines={2}
+        placeholder="A small description"
+        value={description}
+        onChangeText={text => setDescription(text)}
+        editable={!props.isLoading}
+      />
+      <TextInput
+        key="body"
+        style={styles.input}
+        multiline
+        numberOfLines={10}
+        placeholder="Your text post"
+        value={body}
+        onChangeText={text => setBody(text)}
+        editable={!props.isLoading}
+      />
+      <TextInput
+        key="taglist"
+        style={styles.lastInput}
+        placeholder="Space separated tags (optional)"
+        value={taglist}
+        onChangeText={text => setTaglist(text)}
+        editable={!props.isLoading}
+      />
       <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
     </View>
   );
@@ -51,6 +84,10 @@ CreateArticle.navigationOptions = () => ({
   }
 });
 
-const mapDispatchToProps = dispatch => ({postArticle: (article: ArticleForCreate) => dispatch(createArticle(article))})
-const CreateArticlePage = connect(null, mapDispatchToProps)(CreateArticle);
+const mapStateToProps = state => ({ isLoading: state.article.isLoadingCreate });
+const mapDispatchToProps = dispatch => ({ postArticle: (article: ArticleForCreate) => dispatch(createArticle(article)) });
+const CreateArticlePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateArticle);
 export default CreateArticlePage;
