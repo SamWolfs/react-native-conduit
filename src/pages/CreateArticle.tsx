@@ -29,9 +29,11 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
   };
 
   // TODO: Run `expo install expo-location` and `expo install expo-permissions` to install the necessary dependencies
-  // TODO: In the useEffect hook, use Permissions API to request LOCATION permission (see docs: https://docs.expo.io/versions/v35.0.0/sdk/location/)
-  // TODO: Create a local state variable to hold the location, if permission is granted, otherwise show a Toast (https://facebook.github.io/react-native/docs/toastandroid) with a descriptive error message
-  // TODO: Add a Text element to the form that shows from which Location the user is sending the article, or 'Location disabled' in case no permission was granted
+  // TODO: Create a function to get the location; use Permissions API to request LOCATION permission (see docs: https://docs.expo.io/versions/v35.0.0/sdk/location/)
+  // TODO: Use the `getCurrentPositionAsync()` function to get your device's position and `reverseGeocodeAsync(position)` function to translate the position to a location
+  // TODO: Use the `useEffect` hook to fire the function onLoad, make sure that it only fire onLoad (geolocation functions are expensive to run)
+  // TODO: Create a local state variable to hold the location, if permission is granted, optionally show a Toast (https://facebook.github.io/react-native/docs/toastandroid) with a descriptive error message if permission was denied
+  // TODO: Add a Text element to the form that shows from which Location the user is sending the article, or 'Location unknown' in case no permission was granted
 
 
   return (
