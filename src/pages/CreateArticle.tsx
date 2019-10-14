@@ -28,6 +28,12 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
     props.postArticle(article);
   };
 
+  // TODO: Run `expo install expo-location` and `expo install expo-permissions` to install the necessary dependencies
+  // TODO: In the useEffect hook, use Permissions API to request LOCATION permission (see docs: https://docs.expo.io/versions/v35.0.0/sdk/location/)
+  // TODO: Create a local state variable to hold the location, if permission is granted, otherwise show a Toast (https://facebook.github.io/react-native/docs/toastandroid) with a descriptive error message
+  // TODO: Add a Text element to the form that shows from which Location the user is sending the article, or 'Location disabled' in case no permission was granted
+
+
   return (
     <View style={{ padding: 8 }}>
       <TextInput
