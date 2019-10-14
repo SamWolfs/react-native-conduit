@@ -88,10 +88,7 @@ export const createUser = (user: { user: User }) => {
         }
       });
       const body = await response.json();
-      if (body.errors) {
-        dispatch(createUserFail(body.errors));
-        return;
-      }
+      if (!response.ok) throw new Error(body.errors);
       dispatch(createUserSuccess(body.user));
     } catch (error) {
       dispatch(createUserFail(error));
@@ -124,7 +121,7 @@ export const loginUser = (user: { user: User }) => {
         }
       });
       const body = await response.json();
-      if (body.errors) {
+      if (!response.ok) {
         dispatch(createUser(user));
         return;
       }

@@ -3,7 +3,7 @@ import { Article } from "../data";
 
 // TODO: Create new action types and action creators (CREATE_ARTICLE, CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAIL) and their corresponding reducer handlers to CREATE an ARTICLE and handle success or failure
 // TODO: When creating the action creator (thunk), use the (dispatch, getState) signature so you can access to logged in user's token and add it to the request headers
-// TIP: 'Authorization': 'Bearer ' + token
+// TIP: 'Authorization': 'Token ' + token
 // Action Types
 const LOAD_ARTICLE_LIST = 'conduit/article/LOAD_ARTICLE_LIST';
 const LOAD_ARTICLE_LIST_SUCCESS = 'conduit/article/LOAD_ARTICLE_LIST_SUCCESS';
@@ -82,13 +82,22 @@ const reducer: Reducer<ArticleState, ActionTypes> = (
 // Action Creators
 export const getArticleList = () => {
   return async (dispatch) => {
+    dispatch(setArticleListLoading());
     try {
       const response = await fetch(`https://conduit.productionready.io/api/articles`);
+      if (!response.ok) throw new Error();
       const { articles }: { articles: Article[] } = await response.json();
       dispatch(getArticleListSuccess(articles));
     } catch (error) {
       dispatch(getArticleListFail())
     }
+  }
+}
+
+const setArticleListLoading = () => {
+  return {
+    type: LOAD_ARTICLE_LIST,
+    payload: {}
   }
 }
 
@@ -108,13 +117,22 @@ const getArticleListFail = () => {
 
 export const getArticle = (slug: string) => {
   return async (dispatch) => {
+    dispatch(setArticleDetailLoading());
     try {
       const response = await fetch(`https://conduit.productionready.io/api/articles/${slug}`);
+      if (!response.ok) throw new Error();
       const { article }: { article: Article } = await response.json();
       dispatch(getArticleSuccess(article));
     } catch (error) {
       dispatch(getArticleFail())
     }
+  }
+}
+
+const setArticleDetailLoading = () => {
+  return {
+    type: LOAD_ARTICLE_DETAIL,
+    payload: {}
   }
 }
 
