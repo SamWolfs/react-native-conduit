@@ -46,7 +46,7 @@ export const ArticlesList: React.FunctionComponent & { navigationOptions?: Navig
   );
 };
 
-ArticlesList.navigationOptions = () => ({
+ArticlesList.navigationOptions = {
   title: 'Conduit',
   headerStyle: {
     backgroundColor: '#5CB85C'
@@ -54,4 +54,4 @@ ArticlesList.navigationOptions = () => ({
   headerTitleStyle: {
     color: '#FFF'
   }
-});
+};
