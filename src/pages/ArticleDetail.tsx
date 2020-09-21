@@ -19,7 +19,7 @@ export const ArticleDetail: React.FunctionComponent & { navigationOptions?: Navi
   );
 };
 
-ArticleDetail.navigationOptions = () => ({
+ArticleDetail.navigationOptions = {
   title: 'Article',
   headerStyle: {
     backgroundColor: '#333'
@@ -30,4 +30,4 @@ ArticleDetail.navigationOptions = () => ({
   headerBackTitleStyle: {
     color: '#FFF'
   }
-});
+};

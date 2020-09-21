@@ -30,7 +30,7 @@ export const ArticlesList: React.FunctionComponent & { navigationOptions?: Navig
   );
 };
 
-ArticlesList.navigationOptions = () => ({
+ArticlesList.navigationOptions = {
   title: 'Conduit',
   headerStyle: {
     backgroundColor: '#5CB85C'
@@ -38,7 +38,7 @@ ArticlesList.navigationOptions = () => ({
   headerTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 // TODO: create a `mapStateToProps` function that takes a `state` as param and returns a Props object
 // TODO: use react-redux's `connect()` function to bind the Redux store to our component. TIP: use export default connect()
