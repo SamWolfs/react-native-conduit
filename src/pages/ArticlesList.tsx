@@ -30,7 +30,7 @@ const ArticlesList: React.FunctionComponent<Props> & { navigationOptions?: Navig
   );
 };
 
-ArticlesList.navigationOptions = () => ({
+ArticlesList.navigationOptions = {
   title: 'Conduit',
   headerStyle: {
     backgroundColor: '#5CB85C'
@@ -38,7 +38,7 @@ ArticlesList.navigationOptions = () => ({
   headerTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 const mapStateToProps = (state) => ({articles: state.article.list});
 const ArticlesListPage = connect(mapStateToProps)(ArticlesList);
