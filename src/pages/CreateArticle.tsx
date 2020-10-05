@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, TextInput, Button, ToastAndroid, Text } from 'react-native';
+import { View, TextInput, Button, ToastAndroid, Text, ActivityIndicator } from 'react-native';
 import { Colors } from '../styles/_colors';
 import { styles } from './CreateArticle.styles';
 import { ArticleForCreate } from '../data';
@@ -31,7 +31,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
       tagList: taglist.split(' '),
     };
     props.postArticle(article);
-    navigation.goBack();
+    // navigation.goBack();
   };
 
   useEffect(() => {
@@ -92,7 +92,11 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         onChangeText={(text) => setTaglist(text)}
         editable={!props.isLoading}
       />
-      <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
+      {props.isLoading ? (
+        <ActivityIndicator size="large" color="#333" />
+      ) : (
+        <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
+      )}
       <Text>{location ? location.city : location}</Text>
     </View>
   );
