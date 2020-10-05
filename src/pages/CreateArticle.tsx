@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, ActivityIndicator } from 'react-native';
 import { NavigationStackOptions } from 'react-navigation-stack';
 import { Colors } from '../styles/_colors';
 import { styles } from './CreateArticle.styles';
 import { ArticleForCreate } from '../data';
 import { createArticle } from '../reducks/article';
 import { connect } from 'react-redux';
-import { FunctionNavigationOptions } from '../hooks';
+import { FunctionNavigationOptions, useNavigation } from '../hooks';
 
 type Props = {
   postArticle: any;
@@ -19,6 +19,8 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
   const [body, setBody] = React.useState('');
   const [taglist, setTaglist] = React.useState('');
 
+  const navigation = useNavigation();
+
   const createArticle = () => {
     const article: ArticleForCreate = {
       title: title,
@@ -27,6 +29,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
       tagList: taglist.split(' ')
     };
     props.postArticle(article);
+    // navigation.goBack();
   };
 
   // TODO: Run `expo install expo-location` and `expo install expo-permissions` to install the necessary dependencies
@@ -75,7 +78,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         onChangeText={text => setTaglist(text)}
         editable={!props.isLoading}
       />
-      <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
+      { props.isLoading ? <ActivityIndicator size="large" color="#333" /> : <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button> }
     </View>
   );
 };
