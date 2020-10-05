@@ -34,7 +34,7 @@ const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: Navi
   );
 };
 
-ArticleDetail.navigationOptions = () => ({
+ArticleDetail.navigationOptions = {
   title: 'Article',
   headerStyle: {
     backgroundColor: '#333'
@@ -45,7 +45,7 @@ ArticleDetail.navigationOptions = () => ({
   headerBackTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 const mapStateToProps = state => ({ article: state.article.detail, isLoading: state.article.isLoadingDetail });
 const mapDispatchToProps = dispatch => ({ getArticle: (slug: string) => dispatch(getArticle(slug)) });

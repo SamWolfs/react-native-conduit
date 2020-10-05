@@ -24,7 +24,7 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
   );
 };
 
-CreateArticle.navigationOptions = () => ({
+CreateArticle.navigationOptions = {
   title: 'Create Article',
   headerStyle: {
     backgroundColor: '#333'
@@ -35,7 +35,7 @@ CreateArticle.navigationOptions = () => ({
   headerBackTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 // TODO: wire up the component to Redux by defining mapDispatchToProps and linking it to a postArticle action creator
 // TODO: define CreateArticlePage and use react-redux's connect function to link the component to the Redux store
