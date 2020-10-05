@@ -7,7 +7,7 @@ import { createArticle } from '../reducks/article';
 import { connect } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import { FunctionNavigationOptions } from '../hooks';
+import { FunctionNavigationOptions, useNavigation } from '../hooks';
 
 type Props = {
   postArticle: any;
@@ -21,14 +21,17 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
   const [taglist, setTaglist] = React.useState('');
   const [location, setLocation] = React.useState(null);
 
+  const navigation = useNavigation();
+
   const createArticle = () => {
     const article: ArticleForCreate = {
       title: title,
       description: description,
       body: body,
-      tagList: taglist.split(' ')
+      tagList: taglist.split(' '),
     };
     props.postArticle(article);
+    navigation.goBack();
   };
 
   useEffect(() => {
@@ -41,12 +44,15 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
       ToastAndroid.show('Location Permission Denied', ToastAndroid.SHORT);
       setLocation('Location unknown');
     } else {
-      const position = await Location.getCurrentPositionAsync();
-      const [location] = await Location.reverseGeocodeAsync(position.coords);
-      setLocation(location);
+      try {
+        const position = await Location.getCurrentPositionAsync();
+        const [location] = await Location.reverseGeocodeAsync(position.coords);
+        setLocation(location);
+      } catch (e) {
+        setLocation('Location unknown');
+      }
     }
-  }
-
+  };
 
   return (
     <View style={{ padding: 8 }}>
@@ -55,7 +61,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         style={styles.input}
         placeholder="An interesting title"
         value={title}
-        onChangeText={text => setTitle(text)}
+        onChangeText={(text) => setTitle(text)}
         editable={!props.isLoading}
       />
       <TextInput
@@ -65,7 +71,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         numberOfLines={2}
         placeholder="A small description"
         value={description}
-        onChangeText={text => setDescription(text)}
+        onChangeText={(text) => setDescription(text)}
         editable={!props.isLoading}
       />
       <TextInput
@@ -75,7 +81,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         numberOfLines={10}
         placeholder="Your text post"
         value={body}
-        onChangeText={text => setBody(text)}
+        onChangeText={(text) => setBody(text)}
         editable={!props.isLoading}
       />
       <TextInput
@@ -83,7 +89,7 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
         style={styles.lastInput}
         placeholder="Space separated tags (optional)"
         value={taglist}
-        onChangeText={text => setTaglist(text)}
+        onChangeText={(text) => setTaglist(text)}
         editable={!props.isLoading}
       />
       <Button title="Submit" color={Colors.primaryDark} onPress={() => createArticle()}></Button>
@@ -95,20 +101,17 @@ const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions 
 CreateArticle.navigationOptions = () => ({
   title: 'Create Article',
   headerStyle: {
-    backgroundColor: '#333'
+    backgroundColor: '#333',
   },
   headerTitleStyle: {
-    color: '#FFF'
+    color: '#FFF',
   },
   headerBackTitleStyle: {
-    color: '#FFF'
-  }
+    color: '#FFF',
+  },
 });
 
-const mapStateToProps = state => ({ isLoading: state.article.isLoadingCreate });
-const mapDispatchToProps = dispatch => ({ postArticle: (article: ArticleForCreate) => dispatch(createArticle(article)) });
-const CreateArticlePage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateArticle);
+const mapStateToProps = (state) => ({ isLoading: state.article.isLoadingCreate });
+const mapDispatchToProps = (dispatch) => ({ postArticle: (article: ArticleForCreate) => dispatch(createArticle(article)) });
+const CreateArticlePage = connect(mapStateToProps, mapDispatchToProps)(CreateArticle);
 export default CreateArticlePage;
