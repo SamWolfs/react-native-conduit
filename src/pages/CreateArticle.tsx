@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View, TextInput, Button, ToastAndroid, Text } from 'react-native';
-import { NavigationStackOptions } from 'react-navigation-stack';
 import { Colors } from '../styles/_colors';
 import { styles } from './CreateArticle.styles';
 import { ArticleForCreate } from '../data';
@@ -8,13 +7,14 @@ import { createArticle } from '../reducks/article';
 import { connect } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
+import { FunctionNavigationOptions } from '../hooks';
 
 type Props = {
   postArticle: any;
   isLoading: boolean;
 };
 
-const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
+const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions = (props): JSX.Element => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [body, setBody] = React.useState('');

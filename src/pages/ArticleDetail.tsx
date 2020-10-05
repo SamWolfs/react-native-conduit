@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { NavigationStackOptions } from 'react-navigation-stack';
 import { styles } from './ArticleDetail.styles';
-import { useNavigation } from '../hooks';
+import { FunctionNavigationOptions, useNavigation } from '../hooks';
 import { Article } from '../data';
 import { ArticleHeader } from '../ui';
 import { getArticle } from '../reducks/article';
@@ -14,7 +13,7 @@ type Props = {
   getArticle: any;
 };
 
-const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
+const ArticleDetail: React.FunctionComponent<Props> & FunctionNavigationOptions = (props): JSX.Element => {
   const navigation = useNavigation();
   const { slug } = navigation.state.params;
   useEffect(() => {
