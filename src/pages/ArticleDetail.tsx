@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { NavigationStackOptions } from 'react-navigation-stack';
 import { styles } from './ArticleDetail.styles';
-import { useNavigation } from '../hooks';
+import { FunctionNavigationOptions, useNavigation } from '../hooks';
 import { Article } from '../data';
 import { ArticleHeader } from '../ui';
 import { getArticle } from '../reducks/article';
@@ -14,7 +13,7 @@ type Props = {
   getArticle: any;
 };
 
-const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
+const ArticleDetail: React.FunctionComponent<Props> & FunctionNavigationOptions = (props): JSX.Element => {
   const navigation = useNavigation();
   const { slug } = navigation.state.params;
   useEffect(() => {
@@ -34,7 +33,7 @@ const ArticleDetail: React.FunctionComponent<Props> & { navigationOptions?: Navi
   );
 };
 
-ArticleDetail.navigationOptions = () => ({
+ArticleDetail.navigationOptions = {
   title: 'Article',
   headerStyle: {
     backgroundColor: '#333'
@@ -45,7 +44,7 @@ ArticleDetail.navigationOptions = () => ({
   headerBackTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 const mapStateToProps = state => ({ article: state.article.detail, isLoading: state.article.isLoadingDetail });
 const mapDispatchToProps = dispatch => ({ getArticle: (slug: string) => dispatch(getArticle(slug)) });

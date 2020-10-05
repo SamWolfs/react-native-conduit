@@ -3,7 +3,7 @@ import { View, FlatList, Text, TouchableWithoutFeedback } from 'react-native';
 import { ArticlePreview } from '../ui';
 import { styles } from './ArticlesList.styles';
 import { NavigationStackOptions } from 'react-navigation-stack';
-import { useNavigation } from '../hooks';
+import { FunctionNavigationOptions, useNavigation } from '../hooks';
 import { Article } from '../data';
 import { connect } from 'react-redux';
 import { getArticleList } from '../reducks/article';
@@ -17,7 +17,7 @@ type Props = {
   getArticleList: () => (dispatch: any) => Promise<void>;
 };
 
-const ArticlesList: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
+const ArticlesList: React.FunctionComponent<Props> & FunctionNavigationOptions = (props): JSX.Element => {
   const navigation = useNavigation();
   const navigateArticle = (slug: string) => navigation.navigate('Article', { slug: slug });
 

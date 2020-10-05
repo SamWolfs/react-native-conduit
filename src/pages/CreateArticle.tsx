@@ -6,13 +6,14 @@ import { styles } from './CreateArticle.styles';
 import { ArticleForCreate } from '../data';
 import { createArticle } from '../reducks/article';
 import { connect } from 'react-redux';
+import { FunctionNavigationOptions } from '../hooks';
 
 type Props = {
   postArticle: any;
   isLoading: boolean;
 };
 
-const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: NavigationStackOptions } = (props): JSX.Element => {
+const CreateArticle: React.FunctionComponent<Props> & FunctionNavigationOptions = (props): JSX.Element => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [body, setBody] = React.useState('');
@@ -79,7 +80,7 @@ const CreateArticle: React.FunctionComponent<Props> & { navigationOptions?: Navi
   );
 };
 
-CreateArticle.navigationOptions = () => ({
+CreateArticle.navigationOptions = {
   title: 'Create Article',
   headerStyle: {
     backgroundColor: '#333'
@@ -90,7 +91,7 @@ CreateArticle.navigationOptions = () => ({
   headerBackTitleStyle: {
     color: '#FFF'
   }
-});
+};
 
 const mapStateToProps = state => ({ isLoading: state.article.isLoadingCreate });
 const mapDispatchToProps = dispatch => ({ postArticle: (article: ArticleForCreate) => dispatch(createArticle(article)) });
