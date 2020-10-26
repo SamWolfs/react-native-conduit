@@ -1,5 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import ArticlesListPage from './src/pages/ArticlesList';
+import ArticleDetailPage from './src/pages/ArticleDetail';
+import CreateArticlePage from './src/pages/CreateArticle';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './src/reducks';
+import thunk from 'redux-thunk';
+import { loginUser } from './src/reducks/user';
 
 // TODO: Create new file in the src/ui directory named CircledImage.tsx
 // TODO: Build a custom component `CircledImage` that uses the built-in <Image>-element and accepts a size and an optional image link and style
@@ -9,19 +18,30 @@ import { StyleSheet, Text, View } from 'react-native';
 // TODO (optional): Barrel your exports in an index.ts file under the src/ui directory
 
 export default function App() {
+  const Stack = createStackNavigator({
+    Home: {
+      screen: ArticlesListPage
+    },
+    Article: {
+      screen: ArticleDetailPage
+    },
+    CreateArticle: {
+      screen: CreateArticlePage
+    }
+  });
+
+  const store = createStore(reducer, applyMiddleware(thunk));
+  
+  const AppContainer = createAppContainer(Stack);
+
+  useEffect(() => {
+    //@ts-ignore
+    store.dispatch(loginUser({user: { username: 'swo', email: 'swo@asist.be', password: 'swoswoswo' }}));
+  }, []);
+  
   return (
-    <View style={styles.container}>
-      <Text>Hello PXL!</Text>
-      <Text>Time to get started!</Text>
-    </View>
+    <Provider store={store}>
+      <AppContainer /> 
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
