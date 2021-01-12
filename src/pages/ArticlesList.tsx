@@ -21,7 +21,7 @@ const ArticlesList: React.FunctionComponent<Props> & FunctionNavigationOptions =
 
   useEffect(() => {
     props.getArticleList();
-  });
+  }, []);
 
   const renderItem = ({ item }: { item: Article }): JSX.Element => {
     return (
